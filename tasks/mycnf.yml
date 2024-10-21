@@ -1,0 +1,24 @@
+---
+
+- name: "mycnf: Copy {{ bsd_mysql_conf_file }}.sample to my.cnf"
+  ansible.builtin.command:
+    cmd: "cp {{ bsd_mysql_conf_file }}.sample {{ bsd_mysql_conf_file }}"
+    creates: "{{ bsd_mysql_conf_file }}"
+
+- name: "mycnf: Configure {{ bsd_mysql_conf_file }}"
+  community.general.ini_file:
+    path: "{{ bsd_mysql_conf_file }}"
+    state: "{{ item.state|default('present') }}"
+    section: "{{ item.sec }}"
+    option: "{{ item.key }}"
+    value: "{{ item.val }}"
+    owner: "{{ bsd_mysql_conf_owner }}"
+    group: "{{ bsd_mysql_conf_group }}"
+    mode: "{{ bsd_mysql_conf_mode }}"
+    backup: "{{ bsd_mysql_conf_backup }}"
+    create: true
+  loop: "{{ bsd_mysql_conf }}"
+  notify: restart mysql
+
+# EOF
+...

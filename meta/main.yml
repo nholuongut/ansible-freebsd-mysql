@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  namespace: nholuong
+  role_name: freebsd_mysql
+  author: Vladimir Botka
+  description: FreeBSD. Install and configure MySQL.
+  company: https://botka.link
+  github_branch: master
+  license: BSD
+  min_ansible_version: "2.11"
+  platforms:
+    - name: FreeBSD
+      versions:
+        - 12.1
+  galaxy_tags:
+    - freebsd
+    - mysql
+dependencies: []
+collections:
+  - ansible.posix
+  - community.general
+  - community.mysql
+...
